@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 // pages and components
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 
 function App() {
@@ -11,10 +12,10 @@ function App() {
 
   return (
     <>
-    <div className="app">
+      <div className="app flex flex-col h-screen">
       <BrowserRouter>
         <Navbar/>
-      <div className="pages">
+          <div className="pages mb-auto">
         <Routes>
           <Route 
             path="/"
@@ -22,6 +23,7 @@ function App() {
           />
         </Routes>
       </div>
+      <Footer/>
       </BrowserRouter>
 
     </div>

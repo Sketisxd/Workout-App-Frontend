@@ -15,7 +15,7 @@ const Home = () => {
             const json = await response.json()
 
             if(response.ok) {
-                await timeout(3000);
+                // await timeout(3000);
                 dispatch({type: 'SET_WORKOUTS', payload: json})
                 setLoading(false)
             }
