@@ -67,7 +67,7 @@ const WorkoutForm = () => {
                     className={`${emptyFields.includes('reps') ? 'error' : ''} border rounded-sm border-gray-400`}
             />
                 
-                <button className="cursor-pointer bg-black-slate rounded-md mt-5 p-3 text-white hover:bg-charcoal-black  transition ease-in-out duration-150">Add Workout</button>
+                <button className="cursor-pointer bg-yellow-400 rounded-md mt-5 p-3 border border-gray-900 text-black hover:bg-charcoal-black hover:text-white  transition ease-in-out duration-300">Add Workout</button>
                 {error && <div className="text-red-600">{error}</div>}
             </div >
         </form>
