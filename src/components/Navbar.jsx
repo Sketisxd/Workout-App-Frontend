@@ -14,6 +14,12 @@ const Navbar = () => {
                 {/* <div className="ml-auto text-md ">
                 </div> */}
             </div>
+            <nav>
+                <div>
+                    <Link to="/login">Login</Link>
+                    <Link to="/signup">Sign up</Link>
+                </div>
+            </nav>
         </header>
     )
 }
