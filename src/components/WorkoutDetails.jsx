@@ -26,7 +26,9 @@ const WorkoutDetails = ({workout}) => {
             }
         }
     }
-    
+    const handleUpdate = async() => {
+
+    }
 
     return (
         <div className="workout-details bg-snow-white text-black pl-6 pr-8 pt-4 border border-black rounded-xl relative mx-12 md:mx-5">
@@ -34,7 +36,8 @@ const WorkoutDetails = ({workout}) => {
             <p><strong>Load (kg): </strong> {workout.load}</p>
             <p><strong>Reps: </strong> {workout.reps}</p>
             <p><strong>Added: </strong>{formatDistanceToNow(new Date(workout.createdAt), {addSuffix: true})}</p>
-            <span className="material-symbols-outlined cursor-pointer absolute top-2 right-5 p-2 rounded-md hover:bg-red-600  transition ease-in-out duration-150" onClick={handleClick}>delete</span>
+            <span className="material-symbols-outlined cursor-pointer absolute top-2 right-5 p-2 rounded-md hover:bg-red-600 border  transition ease-in-out duration-300" onClick={handleClick}>delete</span>
+            <span className="material-symbols-outlined cursor-pointer absolute top-2 right-16 p-2 rounded-md hover:bg-yellow-300 border  transition ease-in-out duration-300" onClick={handleUpdate}>update</span>
         </div>
     )
 }
