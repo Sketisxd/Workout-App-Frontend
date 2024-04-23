@@ -1,10 +1,17 @@
+import * as React from 'react';
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
+import FormDialog from "./FormDialog"
+
+
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 const WorkoutDetails = ({workout}) => {
     const {dispatch} = useWorkoutsContext()
     const {user} = useAuthContext()
+
+
+
     const handleClick = async() => {
         if (!user ) {
             return 
@@ -26,18 +33,22 @@ const WorkoutDetails = ({workout}) => {
             }
         }
     }
-    const handleUpdate = async() => {
 
-    }
+        const handleUpdate = async() => {
+
+        }
+
 
     return (
         <div className="workout-details bg-snow-white text-black pl-6 pr-8 pt-4 border border-black rounded-xl relative mx-12 md:mx-5">
             <h4 className="text-2xl mb-4 underline underline-offset-4 ">{workout.title}</h4>
             <p><strong>Load (kg): </strong> {workout.load}</p>
+            
             <p><strong>Reps: </strong> {workout.reps}</p>
             <p><strong>Added: </strong>{formatDistanceToNow(new Date(workout.createdAt), {addSuffix: true})}</p>
             <span className="material-symbols-outlined cursor-pointer absolute top-2 right-5 p-2 rounded-md hover:bg-red-600 border  transition ease-in-out duration-300" onClick={handleClick}>delete</span>
-            <span className="material-symbols-outlined cursor-pointer absolute top-2 right-16 p-2 rounded-md hover:bg-yellow-300 border  transition ease-in-out duration-300" onClick={handleUpdate}>update</span>
+            <FormDialog name={workout.title} id={workout._id} />
+            {/* <span className="material-symbols-outlined cursor-pointer absolute top-2 right-16 p-2 rounded-md hover:bg-yellow-300 border  transition ease-in-out duration-300" onClick={handleUpdate}>update</span> */}
         </div>
     )
 }
