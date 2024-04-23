@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react"
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
+import { useAuthContext } from "../hooks/useAuthContext"
 // components
 import WorkoutDetails from "../components/WorkoutDetails"
 import WorkoutForm from "../components/WorkoutForm"
 const Home = () => {
     const {workouts, dispatch} = useWorkoutsContext()
     const [loading, setLoading] = useState(true)
+    const {user} = useAuthContext()
     function timeout(delay) {
         return new Promise(res => setTimeout(res, delay));
     }
     useEffect(() => {
         const fetchWorkouts = async () => {
-            const response = await fetch('https://workout-app-backend-1x4w.onrender.com/api/workouts')
+            const response = await fetch('https://workout-app-backend-1x4w.onrender.com/api/workouts', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
             const json = await response.json()
 
             if(response.ok) {
@@ -20,8 +26,11 @@ const Home = () => {
                 setLoading(false)
             }
         }
-        fetchWorkouts()
-    }, [dispatch])
+        if (user) {
+            fetchWorkouts()
+        }
+
+    }, [dispatch, user])
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-my-columns container mx-auto gap-5 mt-8">

@@ -1,16 +1,23 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
-
+import { useAuthContext } from "../hooks/useAuthContext"
 // date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 const WorkoutDetails = ({workout}) => {
     const {dispatch} = useWorkoutsContext()
+    const {user} = useAuthContext()
     const handleClick = async() => {
+        if (!user ) {
+            return 
+        }
         if(confirm("Do you really want to delete this exercise?\nSelect Ok if you want to confirm deleting exercise")==false) {
             return
         }
         else {
             const response = await fetch('https://workout-app-backend-1x4w.onrender.com/api/workouts/' + workout._id, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
             })
             const json = await response.json()
 
@@ -19,6 +26,7 @@ const WorkoutDetails = ({workout}) => {
             }
         }
     }
+    
 
     return (
         <div className="workout-details bg-snow-white text-black pl-6 pr-8 pt-4 border border-black rounded-xl relative mx-12 md:mx-5">

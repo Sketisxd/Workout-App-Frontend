@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom'
 import image from '../assets/LogoNavbar.png'
-
+import {useLogout} from '../hooks/useLogout'
+import { useAuthContext } from '../hooks/useAuthContext'
 const Navbar = () => {
+    const {logout} = useLogout()
+    const {user} = useAuthContext()
+    const handleClick = () => {
+        logout()
+    }
     return (
         <header className="bg-snow-white  text-center border border-b-2 border-black ">
             <div className="flex justify-center">
@@ -11,14 +17,20 @@ const Navbar = () => {
                         <img className="h-36 w-36" src={image} />
                     </div>
                 </Link>
-                {/* <div className="ml-auto text-md ">
-                </div> */}
             </div>
             <nav>
+                {user && (
+                <div>
+                    <span>{user.email}</span>
+                    <button onClick={handleClick}>Log out</button>
+                </div>
+                )}
+                {!user && (
                 <div>
                     <Link to="/login">Login</Link>
                     <Link to="/signup">Sign up</Link>
                 </div>
+                )}
             </nav>
         </header>
     )
